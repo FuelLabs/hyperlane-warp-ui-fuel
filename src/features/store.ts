@@ -6,7 +6,8 @@ import {
   WarpCore,
   WarpCoreConfig,
 } from '@hyperlane-xyz/sdk';
-import { objFilter } from '@hyperlane-xyz/utils';
+import { objFilter, ProtocolType } from '@hyperlane-xyz/utils';
+import { Wallet, WalletUnlocked } from 'fuels';
 import { toast } from 'react-toastify';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -33,11 +34,14 @@ export interface AppState {
   multiProvider: MultiProtocolProvider;
   registry: IRegistry;
   warpCore: WarpCore;
+  // Flag to indicate if there is a Fuel chain connected
+  hasFuelChain: boolean;
   setWarpContext: (context: {
     registry: IRegistry;
     chainMetadata: ChainMap<ChainMetadata>;
     multiProvider: MultiProtocolProvider;
     warpCore: WarpCore;
+    hasFuelChain: boolean;
   }) => void;
 
   // User history
@@ -71,21 +75,21 @@ export const useStore = create<AppState>()(
         overrides: ChainMap<Partial<ChainMetadata> | undefined> = {},
       ) => {
         logger.debug('Setting chain overrides in store');
-        const { multiProvider, warpCore } = await initWarpContext({
+        const { multiProvider, warpCore, hasFuelChain } = await initWarpContext({
           ...get(),
           chainMetadataOverrides: overrides,
         });
         const filtered = objFilter(overrides, (_, metadata) => !!metadata);
-        set({ chainMetadataOverrides: filtered, multiProvider, warpCore });
+        set({ chainMetadataOverrides: filtered, multiProvider, warpCore, hasFuelChain });
       },
       warpCoreConfigOverrides: [],
       setWarpCoreConfigOverrides: async (overrides: WarpCoreConfig[] | undefined = []) => {
         logger.debug('Setting warp core config overrides in store');
-        const { multiProvider, warpCore } = await initWarpContext({
+        const { multiProvider, warpCore, hasFuelChain } = await initWarpContext({
           ...get(),
           warpCoreConfigOverrides: overrides,
         });
-        set({ warpCoreConfigOverrides: overrides, multiProvider, warpCore });
+        set({ warpCoreConfigOverrides: overrides, multiProvider, warpCore, hasFuelChain });
       },
       multiProvider: new MultiProtocolProvider({}),
       registry: new GithubRegistry({
@@ -94,9 +98,10 @@ export const useStore = create<AppState>()(
         proxyUrl: config.registryProxyUrl,
       }),
       warpCore: new WarpCore(new MultiProtocolProvider({}), []),
-      setWarpContext: ({ registry, chainMetadata, multiProvider, warpCore }) => {
+      hasFuelChain: false,
+      setWarpContext: ({ registry, chainMetadata, multiProvider, warpCore, hasFuelChain }) => {
         logger.debug('Setting warp context in store');
-        set({ registry, chainMetadata, multiProvider, warpCore });
+        set({ registry, chainMetadata, multiProvider, warpCore, hasFuelChain });
       },
 
       // User history
@@ -159,10 +164,18 @@ export const useStore = create<AppState>()(
             logger.error('Error during hydration', error);
             return;
           }
-          initWarpContext(state).then(({ registry, chainMetadata, multiProvider, warpCore }) => {
-            state.setWarpContext({ registry, chainMetadata, multiProvider, warpCore });
-            logger.debug('Rehydration complete');
-          });
+          initWarpContext(state).then(
+            ({ registry, chainMetadata, multiProvider, warpCore, hasFuelChain = false }) => {
+              state.setWarpContext({
+                registry,
+                chainMetadata,
+                multiProvider,
+                warpCore,
+                hasFuelChain,
+              });
+              logger.debug('Rehydration complete');
+            },
+          );
         };
       },
     },
@@ -173,10 +186,14 @@ async function initWarpContext({
   registry,
   chainMetadataOverrides,
   warpCoreConfigOverrides,
+  fuelWalletUnlocked,
+  fuelChain = 'fueltestnet',
 }: {
   registry: IRegistry;
   chainMetadataOverrides: ChainMap<Partial<ChainMetadata> | undefined>;
   warpCoreConfigOverrides: WarpCoreConfig[];
+  fuelWalletUnlocked?: WalletUnlocked;
+  fuelChain?: string;
 }) {
   try {
     const coreConfig = await assembleWarpCoreConfig(warpCoreConfigOverrides);
@@ -189,8 +206,31 @@ async function initWarpContext({
       chainMetadataOverrides,
     );
     const multiProvider = new MultiProtocolProvider(chainMetadataWithOverrides);
-    const warpCore = WarpCore.FromConfig(multiProvider, coreConfig);
-    return { registry, chainMetadata, multiProvider, warpCore };
+    const hasFuelChain = Object.values(chainMetadataWithOverrides).some(
+      (chain) => chain.protocol === ProtocolType.Fuel,
+    );
+
+    let warpCore: WarpCore;
+
+    if (hasFuelChain && fuelWalletUnlocked) {
+      const fuelProvider = await multiProvider.getFuelProvider('fueltestnet');
+      if (fuelProvider) {
+        const testWallet = Wallet.generate({ provider: fuelProvider });
+        multiProvider.setFuelSigner(fuelChain, testWallet);
+        warpCore = await WarpCore.FromConfigWithFuel(
+          multiProvider,
+          coreConfig,
+          testWallet,
+          fuelChain,
+        );
+      } else {
+        warpCore = WarpCore.FromConfig(multiProvider, coreConfig);
+      }
+    } else {
+      warpCore = WarpCore.FromConfig(multiProvider, coreConfig);
+    }
+
+    return { registry, chainMetadata, multiProvider, warpCore, hasFuelChain };
   } catch (error) {
     toast.error('Error initializing warp context. Please check connection status and configs.');
     logger.error('Error initializing warp context', error);
@@ -199,6 +239,33 @@ async function initWarpContext({
       chainMetadata: {},
       multiProvider: new MultiProtocolProvider({}),
       warpCore: new WarpCore(new MultiProtocolProvider({}), []),
+      hasFuelChain: false,
     };
   }
+}
+
+// Export a function to reinitialize the WarpCore when the Fuel wallet state changes
+export async function reinitializeWarpCore(
+  fuelWalletUnlocked: WalletUnlocked,
+  fuelChain: string = 'fueltestnet',
+) {
+  const store = useStore.getState();
+
+  const { multiProvider, warpCore, hasFuelChain } = await initWarpContext({
+    registry: store.registry,
+    chainMetadataOverrides: store.chainMetadataOverrides,
+    warpCoreConfigOverrides: store.warpCoreConfigOverrides,
+    fuelWalletUnlocked,
+    fuelChain,
+  });
+
+  store.setWarpContext({
+    registry: store.registry,
+    chainMetadata: store.chainMetadata,
+    multiProvider,
+    warpCore,
+    hasFuelChain,
+  });
+
+  return { multiProvider, warpCore, hasFuelChain };
 }
