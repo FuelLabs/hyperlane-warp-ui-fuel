@@ -16,14 +16,12 @@
     "@drift-labs/snap-wallet-adapter": "^0.3.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@fuel-wallet/react": "^0.16.1",
-    "@fuels/connectors": "0.36.1",
-    "@fuels/react": "^0.36.1",
+    "@fuel-wallet/react": "^0.16.0",
     "@headlessui/react": "^2.2.0",
-    "@hyperlane-xyz/registry": "file:../hyperlane-registry",
-    "@hyperlane-xyz/sdk": "file:../hyperlane-monorepo/typescript/sdk",
-    "@hyperlane-xyz/utils": "file:../hyperlane-monorepo/typescript/utils",
-    "@hyperlane-xyz/widgets": "file:../hyperlane-monorepo/typescript/widgets",
+    "@hyperlane-xyz/registry": "11.3.0",
+    "@hyperlane-xyz/sdk": "9.2.1",
+    "@hyperlane-xyz/utils": "9.2.1",
+    "@hyperlane-xyz/widgets": "9.2.1",
     "@interchain-ui/react": "^1.23.28",
     "@metamask/post-message-stream": "6.1.2",
     "@metamask/providers": "10.2.1",
@@ -114,7 +112,9 @@
     "react-fast-compare": "^3.2",
     "viem": "^2.21.41",
     "zustand": "^4.4",
-    "@hyperlane-xyz/utils": "file:../hyperlane-monorepo/typescript/utils",
-    "@hyperlane-xyz/sdk": "file:../hyperlane-monorepo/typescript/sdk"
+    "@hyperlane-xyz/registry": "npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.3",
+    "@hyperlane-xyz/utils": "npm:@fuel-infrastructure/fuel-hyperlane-utils@0.0.3",
+    "@hyperlane-xyz/sdk": "npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.3",
+    "@hyperlane-xyz/widgets": "npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.2"
   }
 }

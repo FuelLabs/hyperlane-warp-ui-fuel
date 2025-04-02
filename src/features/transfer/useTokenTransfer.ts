@@ -1,5 +1,5 @@
 import { TypedTransactionReceipt, WarpCore, WarpTxCategory } from '@hyperlane-xyz/sdk';
-import { toTitleCase, toWei } from '@hyperlane-xyz/utils';
+import { ProtocolType, toTitleCase, toWei } from '@hyperlane-xyz/utils';
 import {
   getAccountAddressForChain,
   useAccounts,
@@ -126,6 +126,28 @@ async function executeTransfer({
       toast.error('Insufficient collateral on destination for transfer');
       throw new Error('Insufficient destination collateral');
     }
+    const fromFuel = originProtocol === ProtocolType.Fuel;
+    if (fromFuel) {
+      const isAmountConvertible = await warpCore.isAmountConvertibleBetweenChains({
+        originTokenAmount,
+        destination,
+        fromFuel,
+      });
+
+      if (!isAmountConvertible) {
+        toast.error('Selected amount cannot be exactly converted to the destination token.');
+      }
+
+      const isAmountCausingPrecisionLoss = await warpCore.isAmountCausingPrecisionLoss({
+        originTokenAmount,
+        destination,
+        fromFuel,
+      });
+
+      if (isAmountCausingPrecisionLoss) {
+        toast.error('Selected amount cannot be exactly converted without precision loss.');
+      }
+    }
 
     addTransfer({
       timestamp: new Date().getTime(),
@@ -148,11 +170,23 @@ async function executeTransfer({
       recipient,
     });
 
+    if (fromFuel) {
+      const isAssetSend = warpCore.assetSendToContractFuel({
+        originTokenAmount,
+        destinationName: activeChain.chainName ?? '',
+      });
+
+      if (!isAssetSend) {
+        toast.error('Failed to send assets to the contract');
+      }
+    }
+
     const hashes: string[] = [];
     let txReceipt: TypedTransactionReceipt | undefined = undefined;
     for (const tx of txs) {
       updateTransferStatus(transferIndex, (transferStatus = txCategoryToStatuses[tx.category][0]));
-      const { hash, confirm } = await sendTransaction({
+      // eslint-disable-next-line prefer-const
+      let { hash, confirm } = await sendTransaction({
         tx,
         chainName: origin,
         activeChainName: activeChain.chainName,
@@ -160,6 +194,9 @@ async function executeTransfer({
       updateTransferStatus(transferIndex, (transferStatus = txCategoryToStatuses[tx.category][1]));
       txReceipt = await confirm();
       const description = toTitleCase(tx.category);
+      if (fromFuel && txReceipt) {
+        hash = txReceipt.receipt[0].transactionHash;
+      }
       logger.debug(`${description} transaction confirmed, hash:`, hash);
       toastTxSuccess(`${description} transaction sent!`, hash, origin);
       hashes.push(hash);

@@ -7,7 +7,7 @@ import {
   WarpCoreConfig,
 } from '@hyperlane-xyz/sdk';
 import { objFilter, ProtocolType } from '@hyperlane-xyz/utils';
-import { Wallet, WalletUnlocked } from 'fuels';
+import { WalletLocked } from 'fuels';
 import { toast } from 'react-toastify';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -186,13 +186,13 @@ async function initWarpContext({
   registry,
   chainMetadataOverrides,
   warpCoreConfigOverrides,
-  fuelWalletUnlocked,
+  fuelWallet,
   fuelChain = 'fueltestnet',
 }: {
   registry: IRegistry;
   chainMetadataOverrides: ChainMap<Partial<ChainMetadata> | undefined>;
   warpCoreConfigOverrides: WarpCoreConfig[];
-  fuelWalletUnlocked?: WalletUnlocked;
+  fuelWallet?: WalletLocked;
   fuelChain?: string;
 }) {
   try {
@@ -212,20 +212,18 @@ async function initWarpContext({
 
     let warpCore: WarpCore;
 
-    if (hasFuelChain && fuelWalletUnlocked) {
-      const fuelProvider = await multiProvider.getFuelProvider('fueltestnet');
-      if (fuelProvider) {
-        const testWallet = Wallet.generate({ provider: fuelProvider });
-        multiProvider.setFuelSigner(fuelChain, testWallet);
-        warpCore = await WarpCore.FromConfigWithFuel(
-          multiProvider,
-          coreConfig,
-          testWallet,
-          fuelChain,
-        );
-      } else {
+    if (hasFuelChain && fuelWallet) {
+      const fuelProvider = await multiProvider.getFuelProvider(fuelChain);
+      if (!fuelProvider) {
         warpCore = WarpCore.FromConfig(multiProvider, coreConfig);
       }
+      multiProvider.setFuelSigner(fuelChain, fuelWallet as WalletLocked);
+      warpCore = await WarpCore.FromConfigWithFuel(
+        multiProvider,
+        coreConfig,
+        fuelWallet,
+        fuelChain,
+      );
     } else {
       warpCore = WarpCore.FromConfig(multiProvider, coreConfig);
     }
@@ -244,18 +242,15 @@ async function initWarpContext({
   }
 }
 
-// Export a function to reinitialize the WarpCore when the Fuel wallet state changes
-export async function reinitializeWarpCore(
-  fuelWalletUnlocked: WalletUnlocked,
-  fuelChain: string = 'fueltestnet',
-) {
+// Reinitialize the WarpCore when the Fuel wallet state changes
+export async function reinitializeWarpCore(fuelWallet: WalletLocked, fuelChain = 'fueltestnet') {
   const store = useStore.getState();
 
   const { multiProvider, warpCore, hasFuelChain } = await initWarpContext({
     registry: store.registry,
     chainMetadataOverrides: store.chainMetadataOverrides,
     warpCoreConfigOverrides: store.warpCoreConfigOverrides,
-    fuelWalletUnlocked,
+    fuelWallet,
     fuelChain,
   });
 

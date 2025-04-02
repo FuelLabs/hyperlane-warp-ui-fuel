@@ -4488,19 +4488,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/registry@file:../hyperlane-registry::locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A.":
-  version: 6.1.0
-  resolution: "@hyperlane-xyz/registry@file:../hyperlane-registry#../hyperlane-registry::hash=3f72ae&locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A."
+"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.3":
+  version: 0.0.3
+  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.3"
   dependencies:
     yaml: "npm:2.4.5"
     zod: "npm:^3.21.2"
-  checksum: 10/51dbdb5a9a372b5fe1a012a386dd6f5573188b3506ae32b1541791df38810cd8c11f119c369371d7171ce179af1143f4040ed9cb635b2c307bc37d40150b22ee
+  checksum: 10/fe29b5d8dd133be0072dd3dad78c1f10edd3cae6dd5f3ef0f72bd3ae44d7ac8e1a647f38002c7ef8d4ca2ba355f543d28a3dc9dc111ea8ce2ebc40cc3a0f48cc
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/sdk@file:../hyperlane-monorepo/typescript/sdk::locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A.":
-  version: 8.6.1
-  resolution: "@hyperlane-xyz/sdk@file:../hyperlane-monorepo/typescript/sdk#../hyperlane-monorepo/typescript/sdk::hash=80af30&locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A."
+"@hyperlane-xyz/sdk@npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.3":
+  version: 0.0.3
+  resolution: "@fuel-infrastructure/fuel-hyperlane-sdk@npm:0.0.3"
   dependencies:
     "@arbitrum/sdk": "npm:^4.0.0"
     "@aws-sdk/client-s3": "npm:^3.577.0"
@@ -4525,13 +4525,13 @@ __metadata:
   peerDependencies:
     "@ethersproject/abi": "*"
     "@ethersproject/providers": "*"
-  checksum: 10/475bd5a82c02235e7d2857b8c9368a516c90030a7cb28ef1b0e5d50cfc7e76e00b5cb89ac36c26711080c06e694ad896a4cb5ceedd4704c73abdafb1a4855413
+  checksum: 10/865e8a5543eb2cc2851ee905642dbd91de828d053dd815ef48ad3f25334d1d861d8b9bffb063bf8eb019f31d55767a16eb36339b203fb0fb267a2dd43acc39b8
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/utils@file:../hyperlane-monorepo/typescript/utils::locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A.":
-  version: 8.6.1
-  resolution: "@hyperlane-xyz/utils@file:../hyperlane-monorepo/typescript/utils#../hyperlane-monorepo/typescript/utils::hash=f0f580&locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A."
+"@hyperlane-xyz/utils@npm:@fuel-infrastructure/fuel-hyperlane-utils@0.0.3":
+  version: 0.0.3
+  resolution: "@fuel-infrastructure/fuel-hyperlane-utils@npm:0.0.3"
   dependencies:
     "@cosmjs/encoding": "npm:^0.32.4"
     "@solana/web3.js": "npm:^1.95.4"
@@ -4541,7 +4541,7 @@ __metadata:
     lodash-es: "npm:^4.17.21"
     pino: "npm:^8.19.0"
     yaml: "npm:2.4.5"
-  checksum: 10/70a7534c9be03229d572023801c49444760ce9025c8dada92d72a64dfbb3f64bad7f45bd67fbb04b1367d1ade1721f7606ceffd215bbab9b55b5c1dd832305cc
+  checksum: 10/70895aa7f937f8d13216f84aad8d149f4f99f4fd78c1a8f5fb99cf1dbd3d6ade5661a4510b637b89713f83dd76dbbf5fe0ddb29b1ef78cf5199f390d41ad0684
   languageName: node
   linkType: hard
 
@@ -4565,10 +4565,10 @@ __metadata:
     "@fuels/connectors": "npm:0.36.1"
     "@fuels/react": "npm:^0.36.1"
     "@headlessui/react": "npm:^2.2.0"
-    "@hyperlane-xyz/registry": "file:../hyperlane-registry"
-    "@hyperlane-xyz/sdk": "file:../hyperlane-monorepo/typescript/sdk"
-    "@hyperlane-xyz/utils": "file:../hyperlane-monorepo/typescript/utils"
-    "@hyperlane-xyz/widgets": "file:../hyperlane-monorepo/typescript/widgets"
+    "@hyperlane-xyz/registry": "npm:11.3.0"
+    "@hyperlane-xyz/sdk": "npm:9.2.1"
+    "@hyperlane-xyz/utils": "npm:9.2.1"
+    "@hyperlane-xyz/widgets": "npm:9.2.1"
     "@interchain-ui/react": "npm:^1.23.28"
     "@metamask/post-message-stream": "npm:6.1.2"
     "@metamask/providers": "npm:10.2.1"
@@ -4627,9 +4627,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@hyperlane-xyz/widgets@file:../hyperlane-monorepo/typescript/widgets::locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A.":
-  version: 8.6.1
-  resolution: "@hyperlane-xyz/widgets@file:../hyperlane-monorepo/typescript/widgets#../hyperlane-monorepo/typescript/widgets::hash=77c880&locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A."
+"@hyperlane-xyz/widgets@npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.2":
+  version: 0.0.2
+  resolution: "@fuel-infrastructure/fuel-hyperlane-widgets@npm:0.0.2"
   dependencies:
     "@cosmos-kit/react": "npm:^2.18.0"
     "@fuel-wallet/react": "npm:^0.16.1"
@@ -4649,7 +4649,7 @@ __metadata:
   peerDependencies:
     react: ^18
     react-dom: ^18
-  checksum: 10/b74cfa17cee0eb43068af2ab031bdae0831d724e198c735096adf8dd0109e8e189215d75c6cbe7ef0158dd2aad2d6c71d6fb934fe3f4fa25c2923231e50238de
+  checksum: 10/ba9fa57880e532cfd0bbf5a120da4e4c9c0d948233267ac2dfab4be7cc8ad4cea17a68dc26ad1a2db27cfe65af932ea1b7e25c0766a1e62d9d5ee1126021c843
   languageName: node
   linkType: hard
 
