@@ -171,10 +171,14 @@ async function executeTransfer({
     });
 
     if (fromFuel) {
-      const isAssetSend = warpCore.assetSendToContractFuel({
+      const isAssetSend = await warpCore.assetSendToContractFuel({
         originTokenAmount,
         destinationName: activeChain.chainName ?? '',
       });
+
+      if (isAssetSend) {
+        toast.success('Asset sent to contract successfully');
+      }
 
       if (!isAssetSend) {
         toast.error('Failed to send assets to the contract');
