@@ -12,7 +12,7 @@ RUN corepack prepare yarn@4.5.0 --activate
 # Copy the rest of the application code to the container.
 COPY . .
 
-# Install only production dependencies using Yarn 4.x.
+# Install dependencies.
 RUN yarn install
 
 # Build the application.
