@@ -1,0 +1,17 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:3000/?origin=fueltestnet&destination=basesepolia&token=0xb876d3ae9b405e2a7cf8ab497d7f9dbd8866d464637de1f64377bf795e68de19",
+      "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+      "webRoot": "${workspaceFolder}",
+      "userDataDir": false
+    }
+  ]
+}
