@@ -1,0 +1,8 @@
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # Map port 3000 on the host to port 3000 in the container
+    restart: always # Ensure the container restarts automatically if it crashes
