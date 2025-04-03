@@ -4488,13 +4488,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.3":
-  version: 0.0.3
-  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.3"
+"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.4":
+  version: 0.0.4
+  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.4"
   dependencies:
     yaml: "npm:2.4.5"
     zod: "npm:^3.21.2"
-  checksum: 10/fe29b5d8dd133be0072dd3dad78c1f10edd3cae6dd5f3ef0f72bd3ae44d7ac8e1a647f38002c7ef8d4ca2ba355f543d28a3dc9dc111ea8ce2ebc40cc3a0f48cc
+  checksum: 10/17ef0173d1626a5b6416bb2a91fa860b992bb57b779902c669da270d90e41a56a642fd79d056df24b802ae7aea5e8ca009dea99c23b44d2cf7dec98a504f2dce
   languageName: node
   linkType: hard
 
