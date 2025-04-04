@@ -19,7 +19,7 @@ const STYLE_SRC_HOSTS = [];
 const IMG_SRC_HOSTS = ['https://*.walletconnect.com', 'https://*.githubusercontent.com'];
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval';
+  script-src 'self'${isDev ? " 'unsafe-eval'" : " 'wasm-unsafe-eval'"};
   style-src 'self' 'unsafe-inline' ${STYLE_SRC_HOSTS.join(' ')};
   connect-src *;
   img-src 'self' blob: data: ${IMG_SRC_HOSTS.join(' ')};
