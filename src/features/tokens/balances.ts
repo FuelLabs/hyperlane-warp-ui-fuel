@@ -1,5 +1,6 @@
+import { useWallet } from '@fuel-wallet/react';
 import { IToken, MultiProtocolProvider, Token } from '@hyperlane-xyz/sdk';
-import { isValidAddress } from '@hyperlane-xyz/utils';
+import { isValidAddress, ProtocolType } from '@hyperlane-xyz/utils';
 import { useAccountAddressForChain } from '@hyperlane-xyz/widgets';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
@@ -12,14 +13,20 @@ import { getChainDisplayName } from '../chains/utils';
 import { TransferFormValues } from '../transfer/types';
 import { useTokenByIndex } from './hooks';
 
-export function useBalance(chain?: ChainName, token?: IToken, address?: Address) {
+export function useBalance(
+  chain?: ChainName,
+  token?: IToken,
+  address?: Address,
+  fuelError: boolean = false,
+) {
   const multiProvider = useMultiProvider();
   const { isLoading, isError, error, data } = useQuery({
     // The Token and Multiprovider classes are not serializable, so we can't use it as a key
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: ['useBalance', chain, address, token?.addressOrDenom],
     queryFn: () => {
-      if (!chain || !token || !address || !isValidAddress(address, token.protocol)) return null;
+      if (!chain || !token || !address || !isValidAddress(address, token.protocol) || fuelError)
+        return null;
       return token.getBalance(multiProvider, address);
     },
     refetchInterval: 5000,
@@ -42,9 +49,13 @@ export function useOriginBalance({ origin, tokenIndex }: TransferFormValues) {
 }
 
 export function useDestinationBalance({ destination, tokenIndex, recipient }: TransferFormValues) {
+  const { wallet } = useWallet();
   const originToken = useTokenByIndex(tokenIndex);
   const connection = originToken?.getConnectionForChain(destination);
-  return useBalance(destination, connection?.token, recipient);
+
+  const chainProtocol = connection?.token.protocol;
+  const fuelWarningCheck = chainProtocol === ProtocolType.Fuel && !wallet;
+  return useBalance(destination, connection?.token, recipient, fuelWarningCheck);
 }
 
 export async function getDestinationNativeBalance(

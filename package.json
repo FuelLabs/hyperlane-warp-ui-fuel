@@ -114,9 +114,9 @@
     "react-fast-compare": "^3.2",
     "viem": "^2.21.41",
     "zustand": "^4.4",
-    "@hyperlane-xyz/registry": "npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.5",
+    "@hyperlane-xyz/registry": "npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.9",
     "@hyperlane-xyz/utils": "npm:@fuel-infrastructure/fuel-hyperlane-utils@0.0.3",
-    "@hyperlane-xyz/sdk": "npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.3",
-    "@hyperlane-xyz/widgets": "npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.2"
+    "@hyperlane-xyz/sdk": "npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.4",
+    "@hyperlane-xyz/widgets": "npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.4"
   }
 }

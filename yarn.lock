@@ -4488,19 +4488,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.5":
-  version: 0.0.5
-  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.5"
+"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.9":
+  version: 0.0.9
+  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.9"
   dependencies:
     yaml: "npm:2.4.5"
     zod: "npm:^3.21.2"
-  checksum: 10/80334729211dc6b5d2b844a6bb61fc86002ae5fc23422eb42a2602d45c8deb86004178e0038777da868c2030b335ada3f462726fe6b164d538b846778b24f8c0
+  checksum: 10/93f85d9190e6e833f6309b40fa96871ac16172e48cbe93a075952617247b71072246d4949cfb9abf52e8bc6b54de0e0c14836c2b3a08e4bb0a89ac38dcfc9277
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/sdk@npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.3":
-  version: 0.0.3
-  resolution: "@fuel-infrastructure/fuel-hyperlane-sdk@npm:0.0.3"
+"@hyperlane-xyz/sdk@npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.4":
+  version: 0.0.4
+  resolution: "@fuel-infrastructure/fuel-hyperlane-sdk@npm:0.0.4"
   dependencies:
     "@arbitrum/sdk": "npm:^4.0.0"
     "@aws-sdk/client-s3": "npm:^3.577.0"
@@ -4525,7 +4525,7 @@ __metadata:
   peerDependencies:
     "@ethersproject/abi": "*"
     "@ethersproject/providers": "*"
-  checksum: 10/865e8a5543eb2cc2851ee905642dbd91de828d053dd815ef48ad3f25334d1d861d8b9bffb063bf8eb019f31d55767a16eb36339b203fb0fb267a2dd43acc39b8
+  checksum: 10/abfdcb754ea9a4cf3d8bac90163a2b32876a23fabf4c4b881c26690423d9ab2f21d5a47726869dacab7824045c96f813fd5eccd75b88aa03d44744344d827bb4
   languageName: node
   linkType: hard
 
@@ -4627,9 +4627,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@hyperlane-xyz/widgets@npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.2":
-  version: 0.0.2
-  resolution: "@fuel-infrastructure/fuel-hyperlane-widgets@npm:0.0.2"
+"@hyperlane-xyz/widgets@npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.4":
+  version: 0.0.4
+  resolution: "@fuel-infrastructure/fuel-hyperlane-widgets@npm:0.0.4"
   dependencies:
     "@cosmos-kit/react": "npm:^2.18.0"
     "@fuel-wallet/react": "npm:^0.16.1"
@@ -4649,7 +4649,7 @@ __metadata:
   peerDependencies:
     react: ^18
     react-dom: ^18
-  checksum: 10/ba9fa57880e532cfd0bbf5a120da4e4c9c0d948233267ac2dfab4be7cc8ad4cea17a68dc26ad1a2db27cfe65af932ea1b7e25c0766a1e62d9d5ee1126021c843
+  checksum: 10/3175cb0c04ded1815070e394c18a7c5b162a1eade17a55a218b899f89f0f53c1fde8c9c8239e904741532691f73e5eab8b013145cf49cc9fb313d33ccaab05fd
   languageName: node
   linkType: hard
 
