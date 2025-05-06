@@ -1,4 +1,4 @@
-import { useWallet } from '@fuel-wallet/react';
+import { useWallet } from '@fuels/react';
 import { IToken, MultiProtocolProvider, Token } from '@hyperlane-xyz/sdk';
 import { isValidAddress, ProtocolType } from '@hyperlane-xyz/utils';
 import { useAccountAddressForChain } from '@hyperlane-xyz/widgets';

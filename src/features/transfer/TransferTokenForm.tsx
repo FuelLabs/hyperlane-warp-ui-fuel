@@ -1,4 +1,4 @@
-import { useWallet } from '@fuel-wallet/react';
+import { useWallet } from '@fuels/react';
 import { TokenAmount, WarpCore } from '@hyperlane-xyz/sdk';
 import { ProtocolType, errorToString, isNullish, toWei } from '@hyperlane-xyz/utils';
 import {

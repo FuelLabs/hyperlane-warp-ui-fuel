@@ -16,15 +16,13 @@ export function FuelInfoBanner() {
           <p>on Mira before transferred using Hyperlane.</p>
         </div>
       </div>
-      <button type="button" className="rounded-full px-2.5 py-1 text-center active:bg-white/60">
-        <IconButton
-          title="Hide info"
-          className="bg-amber-400 hover:rotate-90"
-          onClick={() => setShown(false)}
-        >
-          <XCircleIcon width={16} height={16} />
-        </IconButton>
-      </button>
+      <IconButton
+        title="Hide info"
+        className="rounded-full bg-amber-400 px-2.5 py-1 text-center hover:rotate-90"
+        onClick={() => setShown(false)}
+      >
+        <XCircleIcon width={16} height={16} />
+      </IconButton>
     </div>
   );
 }
