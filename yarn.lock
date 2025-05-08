@@ -4343,9 +4343,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fuels/connectors@npm:0.40.0":
-  version: 0.40.0
-  resolution: "@fuels/connectors@npm:0.40.0"
+"@fuels/connectors@npm:0.41.0":
+  version: 0.41.0
+  resolution: "@fuels/connectors@npm:0.41.0"
   dependencies:
     "@ethereumjs/util": "npm:9.0.3"
     "@ethersproject/bytes": "npm:5.7.0"
@@ -4360,13 +4360,13 @@ __metadata:
     viem: "npm:2.20.1"
   peerDependencies:
     fuels: 0.100.0
-  checksum: 10/5e00d59910bf15e20f1999e5b148474643f318f1672c6afc2c51040298246d695602fe7360744d596588966646d42c64f48ddbb70f54d0884db9dcca4f8e9edc
+  checksum: 10/b4306daed58e98f6fc03fd7f2ff8fde8cf6f571caf6995e2097d61b4f9a985463cb2e5889e8f495c9b30e785daf1f720ff57198c10727282e9e636a231b69132
   languageName: node
   linkType: hard
 
-"@fuels/react@npm:0.40.0, @fuels/react@npm:^0.40.0":
-  version: 0.40.0
-  resolution: "@fuels/react@npm:0.40.0"
+"@fuels/react@npm:0.41.0, @fuels/react@npm:^0.41.0":
+  version: 0.41.0
+  resolution: "@fuels/react@npm:0.41.0"
   dependencies:
     "@radix-ui/react-dialog": "npm:1.1.1"
     events: "npm:3.3.0"
@@ -4374,7 +4374,7 @@ __metadata:
     "@tanstack/react-query": ">=5.0.0"
     fuels: 0.100.0
     react: ">=18.0.0"
-  checksum: 10/74a3862cd3fd9b262fdb8c466774f5a94b84617ed8db70c1465cfdcf268e14e46c961a651724fef7b689eb10b9cd2aa39b9b824d0e05c55836ad751da730af6f
+  checksum: 10/150da0bf909fe1eccf9d98ffeb564baa0c06fe8a51f110bd507c3269783cc036ea9776031835eafaf248123a0f3463382c8679bc6606dd4692c8c42676b72f9e
   languageName: node
   linkType: hard
 
@@ -4561,8 +4561,8 @@ __metadata:
     "@drift-labs/snap-wallet-adapter": "npm:^0.3.0"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
-    "@fuels/connectors": "npm:0.40.0"
-    "@fuels/react": "npm:0.40.0"
+    "@fuels/connectors": "npm:0.41.0"
+    "@fuels/react": "npm:0.41.0"
     "@headlessui/react": "npm:^2.2.0"
     "@hyperlane-xyz/registry": "npm:11.3.0"
     "@hyperlane-xyz/sdk": "npm:9.2.1"
@@ -4627,12 +4627,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@hyperlane-xyz/widgets@file:../hyperlane-monorepo/typescript/widgets::locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A.":
-  version: 0.0.6
-  resolution: "@hyperlane-xyz/widgets@file:../hyperlane-monorepo/typescript/widgets#../hyperlane-monorepo/typescript/widgets::hash=84c407&locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A."
+"@hyperlane-xyz/widgets@npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.7":
+  version: 0.0.7
+  resolution: "@fuel-infrastructure/fuel-hyperlane-widgets@npm:0.0.7"
   dependencies:
     "@cosmos-kit/react": "npm:^2.18.0"
-    "@fuels/react": "npm:^0.40.0"
+    "@fuels/react": "npm:^0.41.0"
     "@headlessui/react": "npm:^2.1.8"
     "@hyperlane-xyz/sdk": "npm:8.6.1"
     "@hyperlane-xyz/utils": "npm:8.6.1"
@@ -4642,14 +4642,14 @@ __metadata:
     "@solana/wallet-adapter-react-ui": "npm:^0.9.31"
     "@solana/web3.js": "npm:^1.95.4"
     clsx: "npm:^2.1.1"
-    fuels: "npm:^0.100.1"
+    fuels: "npm:0.100.1"
     react-tooltip: "npm:^5.28.0"
     viem: "npm:^2.21.45"
     wagmi: "npm:^2.12.26"
   peerDependencies:
     react: ^18
     react-dom: ^18
-  checksum: 10/53ae3d28178e962719277459d8527fd1464686fd0f169835657903a4c93ccbcb7d717bef9fd583a272a9b8012aeebb62ab4a32173d94621059a85c88ef8a0c5b
+  checksum: 10/c0b00fb50b134f60320327d2d08404dbc5ff75f5221e079e7dd3a5ea152f0cd56e4ea8c2e4a91cd575ec93e40403eecd9d2bc39a3c8eaabab9050a81f1714fe9
   languageName: node
   linkType: hard
 
