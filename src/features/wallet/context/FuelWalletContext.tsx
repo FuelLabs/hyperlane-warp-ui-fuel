@@ -1,15 +1,18 @@
 'use client';
 
-import { defaultConnectors } from '@fuels/connectors';
+import { BakoSafeConnector, FueletWalletConnector, FuelWalletConnector } from '@fuels/connectors';
 import { FuelProvider, NetworkConfig, useNetwork, useWallet } from '@fuels/react';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
-import { Provider, TESTNET_NETWORK_URL, Wallet, WalletLocked } from 'fuels';
+import { CHAIN_IDS, Provider, TESTNET_NETWORK_URL, Wallet, WalletLocked } from 'fuels';
 import { logger } from '../../../utils/logger';
 import { reinitializeWarpCore, useStore } from '../../store';
 
-const FUEL_MAINNET_NETWORK = { chainId: 9889, url: 'https://mainnet.fuel.network/v1/graphql' };
-const FUEL_TESTNET_NETWORK = { chainId: 0, url: TESTNET_NETWORK_URL };
+const FUEL_MAINNET_NETWORK = {
+  chainId: CHAIN_IDS.fuel.mainnet,
+  url: 'https://mainnet.fuel.network/v1/graphql',
+};
+const FUEL_TESTNET_NETWORK = { chainId: CHAIN_IDS.fuel.testnet, url: TESTNET_NETWORK_URL };
 
 function FuelWalletTracker() {
   const { wallet } = useWallet();
@@ -20,7 +23,6 @@ function FuelWalletTracker() {
       try {
         if (!wallet || !network) return;
 
-        logger.warn('Reinitializing WarpCore with fuelwallet access', { network: network?.url });
         const provider = new Provider(network.url);
         const lockedWallet = Wallet.fromAddress(
           wallet.address,
@@ -41,7 +43,7 @@ function FuelWalletTracker() {
 export default function FuelWalletContext({ children }: PropsWithChildren<unknown>) {
   const { transferLoading } = useStore();
   const currentState = useStore.getState();
-  const [networks, setNetworks] = useState<NetworkConfig[]>([FUEL_MAINNET_NETWORK]);
+  const [networks, setNetworks] = useState<NetworkConfig[]>([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -58,10 +60,13 @@ export default function FuelWalletContext({ children }: PropsWithChildren<unknow
   return (
     <FuelProvider
       fuelConfig={{
-        connectors: defaultConnectors({ devMode: true }),
+        connectors: [
+          new FueletWalletConnector(),
+          new FuelWalletConnector(),
+          new BakoSafeConnector(),
+        ],
       }}
       networks={networks}
-      uiConfig={{ suggestBridge: false }}
     >
       <FuelWalletTracker />
       {children}

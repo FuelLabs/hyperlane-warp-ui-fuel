@@ -118,7 +118,7 @@
     "fuels": "0.100.1",
     "@hyperlane-xyz/registry": "npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.9",
     "@hyperlane-xyz/utils": "npm:@fuel-infrastructure/fuel-hyperlane-utils@0.0.3",
-    "@hyperlane-xyz/sdk": "npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.4",
-    "@hyperlane-xyz/widgets": "npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.7"
+    "@hyperlane-xyz/sdk": "npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.5",
+    "@hyperlane-xyz/widgets": "npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.11"
   }
 }
