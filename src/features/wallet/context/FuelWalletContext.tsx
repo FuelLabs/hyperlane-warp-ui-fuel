@@ -1,6 +1,6 @@
 'use client';
 
-import { BakoSafeConnector, FueletWalletConnector, FuelWalletConnector } from '@fuels/connectors';
+import { FuelWalletConnector } from '@fuels/connectors';
 import { FuelProvider, NetworkConfig, useNetwork, useWallet } from '@fuels/react';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
@@ -29,7 +29,10 @@ function FuelWalletTracker() {
           provider,
         ) as unknown as WalletLocked;
 
-        await reinitializeWarpCore(lockedWallet);
+        await reinitializeWarpCore(
+          lockedWallet,
+          network.url === FUEL_TESTNET_NETWORK.url ? 'fueltestnet' : 'fuelignition',
+        );
       } catch (error) {
         logger.error('Error in updateWalletInWarpCore:', error);
       }
@@ -60,11 +63,7 @@ export default function FuelWalletContext({ children }: PropsWithChildren<unknow
   return (
     <FuelProvider
       fuelConfig={{
-        connectors: [
-          new FueletWalletConnector(),
-          new FuelWalletConnector(),
-          new BakoSafeConnector(),
-        ],
+        connectors: [new FuelWalletConnector()],
       }}
       networks={networks}
     >
