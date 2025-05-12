@@ -7,6 +7,7 @@ const Home: NextPage = () => {
   return (
     <div className="space-y-3 pt-4">
       <TipCard />
+      {/* <FuelInfoBanner /> */}
       <div className="relative">
         <TransferTokenCard />
         <FloatingButtonStrip />

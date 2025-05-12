@@ -1,3 +1,4 @@
+import { useWallet } from '@fuels/react';
 import { TokenAmount, WarpCore } from '@hyperlane-xyz/sdk';
 import { ProtocolType, errorToString, isNullish, toWei } from '@hyperlane-xyz/utils';
 import {
@@ -26,7 +27,7 @@ import { getQueryParams, updateQueryParam } from '../../utils/queryParams';
 import { ChainConnectionWarning } from '../chains/ChainConnectionWarning';
 import { ChainSelectField } from '../chains/ChainSelectField';
 import { ChainWalletWarning } from '../chains/ChainWalletWarning';
-import { useChainDisplayName, useMultiProvider } from '../chains/hooks';
+import { useChainDisplayName, useChainProtocol, useMultiProvider } from '../chains/hooks';
 import { getNumRoutesWithSelectedChain, tryGetValidChainName } from '../chains/utils';
 import { useIsAccountSanctioned } from '../sanctions/hooks/useIsAccountSanctioned';
 import { useStore } from '../store';
@@ -266,7 +267,11 @@ function AmountSection({ isNft, isReview }: { isNft: boolean; isReview: boolean 
 }
 
 function RecipientSection({ isReview }: { isReview: boolean }) {
+  const { wallet } = useWallet();
   const { values } = useFormikContext<TransferFormValues>();
+  const chainProtocol = useChainProtocol(values.destination);
+  const fuelWarningCheck =
+    chainProtocol === ProtocolType.Fuel && !wallet && values.tokenIndex && values.recipient !== '';
   const { balance } = useDestinationBalance(values);
   useRecipientBalanceWatcher(values.recipient, balance);
 
@@ -276,7 +281,15 @@ function RecipientSection({ isReview }: { isReview: boolean }) {
         <label htmlFor="recipient" className="block pl-0.5 text-sm text-gray-600">
           Recipient address
         </label>
-        <TokenBalance label="Remote balance" balance={balance} />
+        <div>
+          {fuelWarningCheck ? (
+            <label className="block pl-0.5 text-xs text-red-600">
+              Fetching balance requires a Fuel Wallet connection
+            </label>
+          ) : (
+            <TokenBalance label="Remote balance" balance={balance} />
+          )}
+        </div>
       </div>
       <div className="relative w-full">
         <TextField
@@ -406,8 +419,7 @@ function SelfButton({ disabled }: { disabled?: boolean }) {
   const onClick = () => {
     if (disabled) return;
     if (address) setFieldValue('recipient', address);
-    else
-      toast.warn(`No account found for for chain ${chainDisplayName}, is your wallet connected?`);
+    else toast.warn(`No account found for chain ${chainDisplayName}, is your wallet connected?`);
   };
   return (
     <SolidButton

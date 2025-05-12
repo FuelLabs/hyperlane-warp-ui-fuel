@@ -69,6 +69,12 @@ const nextConfig = {
       test: /\.ya?ml$/,
       use: 'yaml-loader',
     });
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@fuels/react': require.resolve('@fuels/react'),
+      '@tanstack/react-query': require.resolve('@tanstack/react-query'),
+    };
     return config;
   },
 
@@ -86,6 +92,7 @@ const nextConfig = {
   },
 
   reactStrictMode: true,
+  transpilePackages: ['@fuels/connectors', '@fuels/react', 'fuels'],
 };
 
 const sentryOptions = {

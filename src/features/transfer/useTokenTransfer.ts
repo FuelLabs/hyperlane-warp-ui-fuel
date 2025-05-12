@@ -20,6 +20,7 @@ import { tryGetMsgIdFromTransferReceipt } from './utils';
 const CHAIN_MISMATCH_ERROR = 'ChainMismatchError';
 const TRANSFER_TIMEOUT_ERROR1 = 'block height exceeded';
 const TRANSFER_TIMEOUT_ERROR2 = 'timeout';
+const FUEL_REJECT = 'rejected the transaction';
 
 export function useTokenTransfer(onDone?: () => void) {
   const { transfers, addTransfer, updateTransferStatus } = useStore((s) => ({
@@ -127,7 +128,15 @@ async function executeTransfer({
       throw new Error('Insufficient destination collateral');
     }
     const fromFuel = originProtocol === ProtocolType.Fuel;
-    if (fromFuel) {
+    const toFuel = connection.token.protocol === ProtocolType.Fuel;
+    const isFuelWalletConnected = activeAccounts.accounts.fuel.isReady;
+
+    if (!isFuelWalletConnected) {
+      toast.warn(
+        'Fuel Wallet connection is required to check if the selected amount can be converted without precision loss. We recommend connecting wallet before proceeding.',
+      );
+    }
+    if (isFuelWalletConnected && (fromFuel || toFuel)) {
       const isAmountConvertible = await warpCore.isAmountConvertibleBetweenChains({
         originTokenAmount,
         destination,
@@ -135,17 +144,22 @@ async function executeTransfer({
       });
 
       if (!isAmountConvertible) {
-        toast.error('Selected amount cannot be exactly converted to the destination token.');
+        toast.error('Selected amount cannot be converted to the destination token.');
+        return;
       }
 
-      const isAmountCausingPrecisionLoss = await warpCore.isAmountCausingPrecisionLoss({
+      const { remainder, decimalDiff } = await warpCore.isAmountCausingPrecisionLoss({
         originTokenAmount,
         destination,
         fromFuel,
       });
 
-      if (isAmountCausingPrecisionLoss) {
-        toast.error('Selected amount cannot be exactly converted without precision loss.');
+      if (remainder !== 0) {
+        const lossAmount = Number(remainder) / 10 ** originTokenAmount.token.decimals;
+        toast.error(
+          `Proceeding with this transfer will result in a precision loss of ${lossAmount} ${originTokenAmount.token.symbol}. We recommend cancelling this transaction and choosing a different amount (considering decimal difference of ${decimalDiff}) to send`,
+        );
+        return;
       }
     }
 
@@ -169,21 +183,6 @@ async function executeTransfer({
       sender,
       recipient,
     });
-
-    if (fromFuel) {
-      const isAssetSend = await warpCore.assetSendToContractFuel({
-        originTokenAmount,
-        destinationName: activeChain.chainName ?? '',
-      });
-
-      if (isAssetSend) {
-        toast.success('Asset sent to contract successfully');
-      }
-
-      if (!isAssetSend) {
-        toast.error('Failed to send assets to the contract');
-      }
-    }
 
     const hashes: string[] = [];
     let txReceipt: TypedTransactionReceipt | undefined = undefined;
@@ -228,6 +227,9 @@ async function executeTransfer({
       toast.error(
         `Transaction timed out, ${getChainDisplayName(multiProvider, origin)} may be busy. Please try again.`,
       );
+    } else if (errorDetails.includes(FUEL_REJECT)) {
+      toast.error(`Transaction Rejected`);
+      return;
     } else {
       toast.error(errorMessages[transferStatus] || 'Unable to transfer tokens.');
     }
