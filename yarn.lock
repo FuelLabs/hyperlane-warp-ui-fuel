@@ -4488,19 +4488,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.9":
-  version: 0.0.9
-  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.9"
+"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.10":
+  version: 0.0.10
+  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.10"
   dependencies:
     yaml: "npm:2.4.5"
     zod: "npm:^3.21.2"
-  checksum: 10/93f85d9190e6e833f6309b40fa96871ac16172e48cbe93a075952617247b71072246d4949cfb9abf52e8bc6b54de0e0c14836c2b3a08e4bb0a89ac38dcfc9277
+  checksum: 10/78856e422e5feafd09e759d686e1c9c1440c1dc7964ca7caf7907ba50c3506114c77121e95bd053b9c662ee633fa63733a45faaf9bd5beaae167255226e8c0dc
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/sdk@npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.5":
-  version: 0.0.5
-  resolution: "@fuel-infrastructure/fuel-hyperlane-sdk@npm:0.0.5"
+"@hyperlane-xyz/sdk@npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.6":
+  version: 0.0.6
+  resolution: "@fuel-infrastructure/fuel-hyperlane-sdk@npm:0.0.6"
   dependencies:
     "@arbitrum/sdk": "npm:^4.0.0"
     "@aws-sdk/client-s3": "npm:^3.577.0"
@@ -4525,7 +4525,7 @@ __metadata:
   peerDependencies:
     "@ethersproject/abi": "*"
     "@ethersproject/providers": "*"
-  checksum: 10/120fc63b22ddbb6c7f56463c2b5977721418114af561d5c5c7ea0609fdc331be71ed85242cafc45d012ddbc1fbf3d504296c281e012fce40629bbcca732ca167
+  checksum: 10/8a9453d1da715c0e1b503f4b686376b740964853105cc73621477433aef15afee6197c6c9e131519600174b17a641ed18ffcac911d3960b3fcd1cccce9dd5044
   languageName: node
   linkType: hard
 
