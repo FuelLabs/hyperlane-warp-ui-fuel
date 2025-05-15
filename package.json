@@ -116,7 +116,7 @@
     "zustand": "^4.4",
     "@fuel-ts/*": "0.100.1",
     "fuels": "0.100.1",
-    "@hyperlane-xyz/registry": "npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.13",
+    "@hyperlane-xyz/registry": "npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.14",
     "@hyperlane-xyz/utils": "npm:@fuel-infrastructure/fuel-hyperlane-utils@0.0.3",
     "@hyperlane-xyz/sdk": "npm:@fuel-infrastructure/fuel-hyperlane-sdk@0.0.6",
     "@hyperlane-xyz/widgets": "npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.11"
