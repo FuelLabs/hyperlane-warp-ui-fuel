@@ -31,7 +31,7 @@ function FuelWalletTracker() {
 
         await reinitializeWarpCore(
           lockedWallet,
-          network.url === FUEL_TESTNET_NETWORK.url ? 'fueltestnet' : 'fuelignition',
+          // network.url === FUEL_TESTNET_NETWORK.url ? 'fueltestnet' : 'fuelignition',
         );
       } catch (error) {
         logger.error('Error in updateWalletInWarpCore:', error);
