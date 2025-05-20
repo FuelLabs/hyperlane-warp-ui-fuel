@@ -63,8 +63,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}
-            - secretRef:
-                name: {{ .Release.Name }}
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
