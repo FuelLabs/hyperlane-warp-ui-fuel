@@ -2,6 +2,9 @@
 
 FROM node:18
 
+ARG NEXT_PUBLIC_WALLET_CONNECT_ID=abc
+ENV NEXT_PUBLIC_WALLET_CONNECT_ID=${NEXT_PUBLIC_WALLET_CONNECT_ID}
+
 # Set the working directory inside the container.
 WORKDIR /app
 

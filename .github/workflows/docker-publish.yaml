@@ -38,3 +38,5 @@ jobs:
           image: 024848458133.dkr.ecr.us-east-1.amazonaws.com/hyperlane-warp-ui-fuel-service
           dockerfile: ./Dockerfile
           context: .
+          build-args: |
+            NEXT_PUBLIC_WALLET_CONNECT_ID=${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_ID }}
