@@ -4488,13 +4488,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.14":
-  version: 0.0.14
-  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.14"
+"@hyperlane-xyz/registry@npm:@fuel-infrastructure/fuel-hyperlane-registry@0.0.15":
+  version: 0.0.15
+  resolution: "@fuel-infrastructure/fuel-hyperlane-registry@npm:0.0.15"
   dependencies:
     yaml: "npm:2.4.5"
     zod: "npm:^3.21.2"
-  checksum: 10/ff2a3c5b3f2b429584cdd379a11251a8909fd8a43c2bfb13aa9b94c582e7b51f1fabaaf09c5053f5092ceccb751d59e17b2e67d726099776656f73ea254b74e8
+  checksum: 10/cf3cf628f128d88469eb9ec20583f0a44aeda3c62c1e9dc7602f2002c360deff8e0a5325250860bae8271704105b1f7728d3bc7d63341b54be87cebb7da44b6f
   languageName: node
   linkType: hard
 
@@ -4627,9 +4627,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@hyperlane-xyz/widgets@file:../hyperlane-monorepo/typescript/widgets::locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A.":
-  version: 0.0.11
-  resolution: "@hyperlane-xyz/widgets@file:../hyperlane-monorepo/typescript/widgets#../hyperlane-monorepo/typescript/widgets::hash=f05e3c&locator=%40hyperlane-xyz%2Fwarp-ui-template%40workspace%3A."
+"@hyperlane-xyz/widgets@npm:@fuel-infrastructure/fuel-hyperlane-widgets@0.0.12":
+  version: 0.0.12
+  resolution: "@fuel-infrastructure/fuel-hyperlane-widgets@npm:0.0.12"
   dependencies:
     "@cosmos-kit/react": "npm:^2.18.0"
     "@fuels/react": "npm:^0.41.0"
@@ -4649,7 +4649,7 @@ __metadata:
   peerDependencies:
     react: ^18
     react-dom: ^18
-  checksum: 10/1d9ecd534501056bf5435da1c0385d22711093e3a75fd728c949b64fa0b848ee47134d1678f47ea049dfb6eb445c7380ec0fa26014f7151b381bc6860566eae9
+  checksum: 10/9e2918304026b3b28b13c80c37d2a2003253fe7ddd2121de5a0a0718647742d8cf01c5e402fba82a7bcadf8b02cd2c126efbbf1d958fdf837f90306c9f94fa11
   languageName: node
   linkType: hard
 
