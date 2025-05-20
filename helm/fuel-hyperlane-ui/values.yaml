@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 024848458133.dkr.ecr.us-east-1.amazonaws.com/fuel-hyperlane-ui
+  repository: 024848458133.dkr.ecr.us-east-1.amazonaws.com/hyperlane-warp-ui-fuel-service-helm
   pullPolicy: Always
   tag: ""
 

@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/docker-publish
         id: publish
         with:
-          aws_role_arn: arn:aws:iam::024848458133:role/github_oidc_FuelLabs_fuel-hyperlane-ui
-          image: 024848458133.dkr.ecr.us-east-1.amazonaws.com/fuel-hyperlane-ui
+          aws_role_arn: arn:aws:iam::024848458133:role/github_oidc_FuelLabs_hyperlane-warp-ui-fuel-service
+          image: 024848458133.dkr.ecr.us-east-1.amazonaws.com/hyperlane-warp-ui-fuel-service
           dockerfile: ./Dockerfile
           context: .
